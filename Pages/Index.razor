@@ -1,0 +1,16 @@
+﻿@inherits IndexBase
+@page "/"
+
+<PageTitle>DynamicComponent Demo</PageTitle>
+
+<h1>DynamicComponent Demo</h1>
+
+<label>Choose a vehicle:</label>
+<select value="@SelectedVehicleType" @onchange="SelectedVehicleChanged">
+    <option value="1">Car</option>
+    <option value="2">Motorcycle</option>
+    <option value="3">Bike</option>
+</select>
+
+<h2 class="mt-4">Basic DynamicComponent Loaded: </h2>
+<DynamicComponent Type="DynamicComponentType" Parameters="DynamicComponentParameters" />
