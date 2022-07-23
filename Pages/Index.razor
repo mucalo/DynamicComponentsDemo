@@ -12,5 +12,10 @@
     <option value="3">Bike</option>
 </select>
 
+@if (!string.IsNullOrEmpty(MessageFromComponent))
+{
+    <p>Message from the component: @MessageFromComponent</p>
+}
+
 <h2 class="mt-4">Basic DynamicComponent Loaded: </h2>
 <DynamicComponent Type="DynamicComponentType" Parameters="DynamicComponentParameters" />

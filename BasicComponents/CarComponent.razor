@@ -1,7 +1,11 @@
 ﻿<h3>Car Component</h3>
-<span>Car created at: @CreatedAt.ToString()</span>
+<div>Car created at: @CreatedAt.ToString()</div>
+<button @onclick="() => { OnButtonClicked.InvokeAsync(ActionDescription); }" >Click the Car button!</button>
 
 @code {
     [Parameter]
     public DateTime CreatedAt { get; set; }
+    [Parameter]
+    public EventCallback<string> OnButtonClicked { get; set; }
+    protected string ActionDescription = "Car Button Clicked!";
 }

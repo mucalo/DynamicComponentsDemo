@@ -8,16 +8,19 @@ namespace DynamicComponentsDemo.Pages
         private const string BASIC_MOTORCYCLE_COMPONENT = "DynamicComponentsDemo.BasicComponents.MotorcycleComponent";
         private const string BASIC_BIKE_COMPONENT = "DynamicComponentsDemo.BasicComponents.BikeComponent";
         private const string CREATED_AT_PARAMETER = "CreatedAt";
+        private const string ON_BUTTON_CLICKED_EVENT_CALLBACK = "OnButtonClicked";
         
         protected Type DynamicComponentType { get; set; } = Type.GetType(BASIC_CAR_COMPONENT);
         protected int SelectedVehicleType { get; set; } = 1;
         protected Dictionary<string, object> DynamicComponentParameters { get; set; }
+        protected string MessageFromComponent { get; set; }
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
             DynamicComponentParameters = new();
             DynamicComponentParameters.Add(CREATED_AT_PARAMETER, DateTime.Now);
+            DynamicComponentParameters.Add(ON_BUTTON_CLICKED_EVENT_CALLBACK, EventCallback.Factory.Create<string>(this, ComponentButtonClicked));
         }
 
         protected void SelectedVehicleChanged(ChangeEventArgs e)
@@ -38,6 +41,11 @@ namespace DynamicComponentsDemo.Pages
                     break;
             }
             DynamicComponentParameters[CREATED_AT_PARAMETER] = DateTime.Now;
+        }
+
+        protected void ComponentButtonClicked(string inputString)
+        {
+            MessageFromComponent = inputString;
         }
     }
 }
