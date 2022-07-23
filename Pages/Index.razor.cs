@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using DynamicComponentsDemo.Extensions;
+using DynamicComponentsDemo.Models;
+using Microsoft.AspNetCore.Components;
 
 namespace DynamicComponentsDemo.Pages
 {
@@ -18,9 +20,16 @@ namespace DynamicComponentsDemo.Pages
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            DynamicComponentParameters = new();
-            DynamicComponentParameters.Add(CREATED_AT_PARAMETER, DateTime.Now);
-            DynamicComponentParameters.Add(ON_BUTTON_CLICKED_EVENT_CALLBACK, EventCallback.Factory.Create<string>(this, ComponentButtonClicked));
+            //DynamicComponentParameters = new();
+            //DynamicComponentParameters.Add(CREATED_AT_PARAMETER, DateTime.Now);
+            //DynamicComponentParameters.Add(ON_BUTTON_CLICKED_EVENT_CALLBACK, EventCallback.Factory.Create<string>(this, ComponentButtonClicked));
+
+            var componentParameters = new ComponentParameters
+            {
+                CreatedAt = DateTime.Now,
+                OnButtonClicked = EventCallback.Factory.Create<string>(this, ComponentButtonClicked)
+            };
+            DynamicComponentParameters = componentParameters.GetParametersForDynamicComponent();
         }
 
         protected void SelectedVehicleChanged(ChangeEventArgs e)
@@ -40,7 +49,13 @@ namespace DynamicComponentsDemo.Pages
                 default:
                     break;
             }
-            DynamicComponentParameters[CREATED_AT_PARAMETER] = DateTime.Now;
+
+            var componentParameters = new ComponentParameters
+            {
+                CreatedAt = DateTime.Now,
+                OnButtonClicked = EventCallback.Factory.Create<string>(this, ComponentButtonClicked)
+            };
+            DynamicComponentParameters = componentParameters.GetParametersForDynamicComponent();
         }
 
         protected void ComponentButtonClicked(string inputString)
