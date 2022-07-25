@@ -2,7 +2,7 @@
 
 namespace DynamicComponentsDemo.Models
 {
-    public interface IComponentParameters
+    public interface IMyComponentParameters
     {
         DateTime CreatedAt { get; set; }
         EventCallback<string> OnButtonClicked { get; set; }

@@ -1,5 +1,4 @@
-﻿using DynamicComponentsDemo.Extensions;
-using DynamicComponentsDemo.Models;
+﻿using DynamicComponentsDemo.Models;
 using Microsoft.AspNetCore.Components;
 
 namespace DynamicComponentsDemo.Pages
@@ -9,6 +8,8 @@ namespace DynamicComponentsDemo.Pages
         private const string BASIC_CAR_COMPONENT = "DynamicComponentsDemo.BasicComponents.CarComponent";
         private const string BASIC_MOTORCYCLE_COMPONENT = "DynamicComponentsDemo.BasicComponents.MotorcycleComponent";
         private const string BASIC_BIKE_COMPONENT = "DynamicComponentsDemo.BasicComponents.BikeComponent";
+        private const string BASIC_HOVERCRAFT_COMPONENT = "DynamicComponentsDemo.BasicComponents.HovercraftComponent";
+
         private const string CREATED_AT_PARAMETER = "CreatedAt";
         private const string ON_BUTTON_CLICKED_EVENT_CALLBACK = "OnButtonClicked";
         
@@ -24,12 +25,12 @@ namespace DynamicComponentsDemo.Pages
             //DynamicComponentParameters.Add(CREATED_AT_PARAMETER, DateTime.Now);
             //DynamicComponentParameters.Add(ON_BUTTON_CLICKED_EVENT_CALLBACK, EventCallback.Factory.Create<string>(this, ComponentButtonClicked));
 
-            var componentParameters = new ComponentParameters
+            var myComponentParameters = new MyComponentParameters
             {
                 CreatedAt = DateTime.Now,
                 OnButtonClicked = EventCallback.Factory.Create<string>(this, ComponentButtonClicked)
             };
-            DynamicComponentParameters = componentParameters.GetParametersForDynamicComponent();
+            DynamicComponentParameters = myComponentParameters.GetParameterDictionary();
         }
 
         protected void SelectedVehicleChanged(ChangeEventArgs e)
@@ -46,16 +47,19 @@ namespace DynamicComponentsDemo.Pages
                 case 3:
                     DynamicComponentType = Type.GetType(BASIC_BIKE_COMPONENT);
                     break;
+                case 4:
+                    DynamicComponentType = Type.GetType(BASIC_HOVERCRAFT_COMPONENT);
+                    break;
                 default:
                     break;
             }
 
-            var componentParameters = new ComponentParameters
+            var myComponentParameters = new MyComponentParameters
             {
                 CreatedAt = DateTime.Now,
                 OnButtonClicked = EventCallback.Factory.Create<string>(this, ComponentButtonClicked)
             };
-            DynamicComponentParameters = componentParameters.GetParametersForDynamicComponent();
+            DynamicComponentParameters = myComponentParameters.GetParameterDictionary();
         }
 
         protected void ComponentButtonClicked(string inputString)
